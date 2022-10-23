@@ -98,5 +98,4 @@ const createPhotos = () => {
   return simularPhotos;
 };
 
-console.log(createPhotos())
-
+createPhotos();
