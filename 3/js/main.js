@@ -29,6 +29,8 @@ const NAMES = [
   'Саша'
 ];
 
+const numberOfPhotos = 25;
+
 const getRandomInteger = function (min, max) {
   if (min < 0 || max < 0) {
     return NaN;
@@ -88,6 +90,12 @@ const createPhoto = () => ({
   comments: getComment()
 });
 
-const simularDescription = Array.from({length:25}, createPhoto);
-simularDescription([]);
+const createPhotos = () => {
+  const simularPhotos = [];
+  for (let i = 1; i <= numberOfPhotos; i++) {
+    simularPhotos.push(createPhoto());
+  }
+  return simularPhotos;
+};
 
+createPhotos();
