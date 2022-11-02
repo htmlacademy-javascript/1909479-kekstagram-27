@@ -31,12 +31,13 @@ const NAMES = [
   'Саша'
 ];
 
-const numberOfPhotos = 25;
+const PHOTOS_COUNT = 25;
+const COMMENTS_COUNT = 5;
 const generateCommentId = createIdGenerator();
 const generatePhotoId = createRandomIdFromRangeGenerator (1, 25);
 const generateUrlId = createRandomIdFromRangeGenerator (1, 25);
 
-const getComment = () => ({
+const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: createArrayElement(MESSAGES),
@@ -48,12 +49,12 @@ const createPhoto = () => ({
   url: `photos/${generateUrlId()}.jpg`,
   description: createArrayElement(DESCRIPTIONS_PHOTO),
   likes: getRandomInteger(15, 200),
-  comments: getComment()
+  comments: Array.from({length: getRandomInteger(1, COMMENTS_COUNT) }, (_ , id) => createComment(id + 1))
 });
 
 const createPhotos = () => {
   const simularPhotos = [];
-  for (let i = 1; i <= numberOfPhotos; i++) {
+  for (let i = 1; i <= PHOTOS_COUNT; i++) {
     simularPhotos.push(createPhoto());
   }
   return simularPhotos;
