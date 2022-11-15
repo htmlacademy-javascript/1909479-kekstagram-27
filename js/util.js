@@ -8,8 +8,8 @@ const getRandomInteger = function (min, max) {
   return Math.floor(result);
 };
 
-const checkStringLangth = (string, maxLength) => string.length <= maxLength;
-checkStringLangth('1sting', 11);
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
+
 
 const createRandomIdFromRangeGenerator = (min, max) => {
   const previousValues = [];
@@ -39,4 +39,4 @@ const createArrayElement = (elements) => (
   elements[getRandomInteger(0, elements.length - 1)]
 );
 
-export {getRandomInteger, createRandomIdFromRangeGenerator, createIdGenerator, createArrayElement};
+export {getRandomInteger, createRandomIdFromRangeGenerator, createIdGenerator, createArrayElement, checkStringLength};
