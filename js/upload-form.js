@@ -1,4 +1,7 @@
 import {pristine, hashtagField, uploadTextArea, uploadForm} from './validate.js';
+import { getDefaultValue } from './scale.js';
+import { resetEffects } from './effects.js';
+import { isEscapeKey } from './util.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -14,7 +17,7 @@ const hiddenForm = () => {
 };
 
 function onEscKeydown (evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     hiddenForm();
   }
@@ -34,6 +37,8 @@ const showForm = () => {
     uploadBox.classList.remove('hidden');
     body.classList.add('modal-open');
     addListeners();
+    getDefaultValue();
+    resetEffects();
   });
 };
 
