@@ -1,3 +1,4 @@
+const ALERT_SHOW_TIME = 5000;
 const getRandomInteger = function (min, max) {
   if (min < 0 || max < 0) {
     return NaN;
@@ -41,4 +42,30 @@ const createArrayElement = (elements) => (
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger, createRandomIdFromRangeGenerator, createIdGenerator, createArrayElement, checkStringLength, isEscapeKey};
+const showErrorAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.width = '100%';
+  alertContainer.style.top = '0';
+  alertContainer.style.padding = '10px 5px';
+  alertContainer.style.fontSize = '22px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'Crimson';
+
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export {
+  getRandomInteger,
+  createRandomIdFromRangeGenerator,
+  createIdGenerator,
+  createArrayElement,
+  checkStringLength,
+  isEscapeKey,
+  showErrorAlert
+};
