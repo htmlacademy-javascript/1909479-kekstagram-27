@@ -3,6 +3,7 @@ import {showPictures} from './pictures.js';
 import { getData } from './api.js';
 import { showErrorAlert, debounce } from './util.js';
 import { setFilterClick } from './filters.js';
+import './preview-picture.js';
 import './upload-form.js';
 import './scale.js';
 import './effects.js';
