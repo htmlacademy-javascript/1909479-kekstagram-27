@@ -60,6 +60,36 @@ const showErrorAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this,rest),timeoutDelay);
+  };
+};
+
+const comparePhotos = (photoA, photoB) => {
+  const commentA = photoA.comments.length;
+  const commentB = photoB.comments.length;
+  return commentB - commentA;
+};
+
+const sortingDiscussed = (photos) => photos.slice().sort(comparePhotos);
+
+const getRandomElementArray = (array) => array[getRandomInteger(0, array.length - 1)];
+const getRandomArray = (array, countElement) => {
+  if (array.length <= countElement) {
+    return array;
+  }
+
+  let resultArray = [];
+  while (resultArray.length !== countElement) {
+    resultArray.push(getRandomElementArray(array));
+    resultArray = Array.from(new Set(resultArray));
+  }
+  return resultArray;
+};
+
 export {
   getRandomInteger,
   createRandomIdFromRangeGenerator,
@@ -67,5 +97,8 @@ export {
   createArrayElement,
   checkStringLength,
   isEscapeKey,
-  showErrorAlert
+  showErrorAlert,
+  debounce,
+  sortingDiscussed,
+  getRandomArray
 };
