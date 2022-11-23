@@ -2,6 +2,7 @@ import { checkStringLength, isEscapeKey } from './util.js';
 import { getDefaultValue } from './scale.js';
 import { resetEffects } from './effects.js';
 import { sendData } from './api.js';
+import { showUploadErrorMessage } from './messages.js';
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -97,7 +98,7 @@ const onFormSubmit = (evt) => {
   if(isValid) {
     const formData = new FormData(evt.target);
     sendData(formData);
-  }
+  }else{showUploadErrorMessage();}
 };
 
 fileField.addEventListener('change', onFileInputChange);
