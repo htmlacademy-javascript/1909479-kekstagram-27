@@ -74,7 +74,7 @@ const comparePhotos = (photoA, photoB) => {
   return commentB - commentA;
 };
 
-const sortingDiscussed = (photos) => photos.slice().sort(comparePhotos);
+const sortDiscussed = (photos) => photos.slice().sort(comparePhotos);
 
 const getRandomElementArray = (array) => array[getRandomInteger(0, array.length - 1)];
 const getRandomArray = (array, countElement) => {
@@ -99,6 +99,6 @@ export {
   isEscapeKey,
   showErrorAlert,
   debounce,
-  sortingDiscussed,
+  sortDiscussed,
   getRandomArray
 };

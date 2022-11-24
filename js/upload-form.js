@@ -2,7 +2,7 @@ import { checkStringLength, isEscapeKey } from './util.js';
 import { getDefaultValue } from './scale.js';
 import { resetEffects } from './effects.js';
 import { sendData } from './api.js';
-import { showUploadErrorMessage } from './messages.js';
+
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -16,7 +16,8 @@ const form = document.querySelector('.img-upload__form');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const cancelButtonRenderPicture = form.querySelector('#upload-cancel');
 const simbolHashtag = /^#[A-Za-zА-яа-яЁё0-9]{1,19}$/;
-const validHashtag = (hashtag) => simbolHashtag.test(hashtag);
+
+const checkValidHashtag = (hashtag) => simbolHashtag.test(hashtag);
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -29,7 +30,7 @@ const pristine = new Pristine(form, {
 
 const validateSymbolsHashtag = (value) => {
   const hashtagsArray = value.trim().split(' ');
-  return hashtagsArray.every(validHashtag);
+  return hashtagsArray.every(checkValidHashtag);
 };
 
 const validateDoubleHashtag = (value) => {
@@ -60,7 +61,7 @@ pristine.addValidator(hashtagInput, validateTagCountHashtag, `Разрешено
 pristine.addValidator(hashtagInput, validateTagDouble, 'Хэштеги не должны дублироваться');
 pristine.addValidator(commentInput, validateComment, `Максимальная длина комментария не более ${MAX_LENGTH_COMMENT} символов.`);
 
-const checkingForFocus = () => document.activeElement === hashtagInput || document.activeElement === commentInput;
+const checkForFocus = () => document.activeElement === hashtagInput || document.activeElement === commentInput;
 
 const hideForm = () => {
   form.reset();
@@ -70,7 +71,7 @@ const hideForm = () => {
 };
 
 const onEscKeyDown = (evt) => {
-  if (isEscapeKey(evt) && !checkingForFocus()) {
+  if (isEscapeKey(evt) && !checkForFocus()) {
     evt.preventDefault();
     hideForm();
   }
@@ -98,7 +99,7 @@ const onFormSubmit = (evt) => {
   if(isValid) {
     const formData = new FormData(evt.target);
     sendData(formData);
-  }else{showUploadErrorMessage();}
+  }
 };
 
 fileField.addEventListener('change', onFileInputChange);

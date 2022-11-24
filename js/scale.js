@@ -5,7 +5,7 @@ const SIZE_STEP = 25;
 const btnScaleSmaller = document.querySelector('.scale__control--smaller');
 const btnScaleBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
-const pictureSize = document.querySelector('.img-upload__preview');
+const pictureSize = document.querySelector('.img-upload__preview img');
 
 let scale;
 

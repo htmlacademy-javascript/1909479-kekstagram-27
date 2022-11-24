@@ -1,4 +1,4 @@
-import { sortingDiscussed, getRandomArray } from './util.js';
+import { sortDiscussed, getRandomArray } from './util.js';
 
 const filterForm = document.querySelector('.img-filters');
 const COUNT_RANDOM_PHOTO = 10;
@@ -19,7 +19,7 @@ const setFilterClick = (data, cb) => {
 
       case 'filter-discussed':
         toggleFilter(evt.target);
-        cb(sortingDiscussed(data));
+        cb(sortDiscussed(data));
         break;
 
       case 'filter-default':
