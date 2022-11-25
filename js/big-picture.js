@@ -2,12 +2,14 @@ import { isEscapeKey } from './util.js';
 
 const MAX_COUNT_COMMENT = 5;
 const bigPicture = document.querySelector('.big-picture');
-const commentCount = document.querySelector('.social__comment-count');
+const commentBlock = document.querySelector('.social__comment-count');
 const commentList = document.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.comments-loader');
 const closeButton = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
+
 let count = 0;
+let commentsCount = document.querySelector('.comments-count');
 
 const createComment = (commentator) => {
   const comment = document.createElement('li');
@@ -32,10 +34,11 @@ const showBigPicture = (info) => {
     });
     commentList.append(fragment);
     commentsLoader.classList.toggle('hidden', info.comments.length === commentsVisible.length);
-    commentCount.innerHTML = `${commentsVisible.length} из <span class="comments-count">${info.comments.length}</span> комментариев`;
+    commentsCount = info.comments.length;
+    commentBlock.textContent = `${commentsVisible.length} из ${commentsCount} комментариев`;
   };
 
-  const commentsLoaderOnClick = () => {
+  const OnClickcommentsLoader = () => {
     count += MAX_COUNT_COMMENT;
     showComments();
   };
@@ -45,18 +48,18 @@ const showBigPicture = (info) => {
   bigPicture.querySelector('.likes-count').textContent = info.likes;
   bigPicture.querySelector('.social__caption').textContent = info.description;
 
-  const hiddenBigPicture = () => {
+  const hideBigPicture = () => {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
-    commentsLoader.removeEventListener('click', commentsLoaderOnClick);
+    commentsLoader.removeEventListener('click', OnClickcommentsLoader);
     document.removeEventListener('keydown', onEscKeydown);
     count = 0;
   };
-  const onCloseButtonClick = () => hiddenBigPicture();
+  const onCloseButtonClick = () => hideBigPicture();
   function onEscKeydown (evt) {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      hiddenBigPicture();
+      hideBigPicture();
     }
   }
   const addListeners = () => {
@@ -69,7 +72,7 @@ const showBigPicture = (info) => {
   body.classList.add('modal-open');
   showComments(info.comments);
   addListeners();
-  commentsLoader.addEventListener('click', commentsLoaderOnClick);
+  commentsLoader.addEventListener('click', OnClickcommentsLoader);
 };
 
 export {showBigPicture};

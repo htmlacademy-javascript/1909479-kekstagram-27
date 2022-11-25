@@ -55,7 +55,7 @@ const EFFECTS = [
 
 const filterRange = document.querySelector('.effect-level__slider');
 const filterInput = document.querySelector('.effect-level__value');
-
+const effectLevelBox = document.querySelector('.img-upload__effect-level');
 const formUpload = document.querySelector('.img-upload__form');
 const filterPreview = document.querySelector('.img-upload__preview img');
 const effectsClass = 'effects__preview--';
@@ -89,17 +89,17 @@ const updateSlider = () => {
 
 function isDefault () {
   if (chosenEffect === noneEffect) {
-    filterRange.classList.add('hidden');
+    effectLevelBox.classList.add('hidden');
     filterPreview.style.filter = 'none';
   } else {
-    filterRange.classList.remove('hidden');
+    effectLevelBox.classList.remove('hidden');
   }
 }
 
-function resetEffects () {
+const resetEffects = () => {
   chosenEffect = noneEffect;
   updateSlider();
-}
+};
 
 formUpload.addEventListener('change', (event) => {
   if (event.target.classList.contains('effects__radio')) {
